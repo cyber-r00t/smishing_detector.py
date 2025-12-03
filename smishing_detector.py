@@ -6,11 +6,13 @@ Clasificador de Smishing Financiero (Bot Anti-Estafas)
 Autor: Jheery Barrientos (CYBER_ROOT)
 Fecha: Diciembre, 2025
 Licencia: MIT (Ver archivo LICENSE para detalles)
+Copyright (c) 2025, CYBER_ROOT
 
 Descripción: Este script utiliza Machine Learning (Naive Bayes) para clasificar 
 mensajes SMS como legítimos ('Ham') o fraudulentos ('Spam') basándose en un 
 dataset público de SMS. Incluye una lógica de reglas para identificar patrones 
-específicos de fraude bancario.
+específicos de fraude bancario en español.
+"""
 
 import pandas as pd
 from sklearn.model_selection import train_test_split

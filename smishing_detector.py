@@ -66,24 +66,32 @@ print("\n--- Evaluación del Modelo ---")
 print(f"Precisión General: {accuracy_score(y_test, y_pred):.4f}")
 print("\nReporte de Clasificación:\n", classification_report(y_test, y_pred))
 
-# --- 6. Función de Detección (¡Prueba Real!) ---
+# --- 6. Función de Detección (Prueba Real) ---
 def detectar_smishing(sms):
     # Vectorizar el nuevo SMS
     sms_vec = vectorizer.transform([sms])
     # Predecir
     prediction = model.predict(sms_vec)[0]
-    
+
     if prediction == 1:
         return "⚠️ FRAUDE/SMISHING detectado (ALERTA ROJA)"
     else:
         return "✅ Mensaje legítimo (HAM)"
 
-# --- PRUEBAS CON TUS MENSAJES (Ejemplos del SMS del BBVA) ---
-print("\n--- Pruebas con tus ejemplos ---")
-test_sms_1 = "Se ha retenido un cargo por el valor de 980EUR en su banca online, sino lo reconoce el cargo llamanos al 742074762"
-test_sms_2 = "Hola, tu paquete ha sido entregado en el buzón. Por favor, confirma la dirección en el siguiente enlace: bit.ly/paquete-estafa"
-test_sms_3 = "Tienes una reunión mañana a las 10am."
+# --- 7. Bucle Interactivo para Pruebas (Nuevo) ---
+print("\n" + "="*50)
+print("🤖 CLASIFICADOR DE SMISHING LISTO 🤖")
+print("El modelo ha sido entrenado con éxito.")
+print("="*50)
 
-print(f"SMS 1 ('{test_sms_1[:30]}...'): {detectar_smishing(test_sms_1)}")
-print(f"SMS 2 ('{test_sms_2[:30]}...'): {detectar_smishing(test_sms_2)}")
-print(f"SMS 3 ('{test_sms_3[:30]}...'): {detectar_smishing(test_sms_3)}")
+while True:
+    print("\n--- Modo Interactivo ---")
+    sms_input = input("📞 Pega el SMS sospechoso aquí (o escribe 'salir' para terminar): \n> ")
+
+    if sms_input.lower() == 'salir':
+        print("Cerrando el clasificador. ¡Cuídate de las estafas!")
+        break
+
+    if sms_input:
+        resultado = detectar_smishing(sms_input)
+        print(f"\n[ RESULTADO ] -> {resultado}")
